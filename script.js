@@ -19,23 +19,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.35 });
 observer.observe(skillsSection);
 
-// Hamburger menu toggle
-const menuToggle = document.getElementById('menu-toggle');
-const navLinks = document.getElementById('nav-links');
-
-function toggleMenu() {
-  const active = menuToggle.classList.toggle('active');
-  navLinks.classList.toggle('active');
-  menuToggle.setAttribute('aria-expanded', active ? 'true' : 'false');
-}
-menuToggle.addEventListener('click', toggleMenu);
-menuToggle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') toggleMenu(); });
-
-// Close menu when link clicked
-document.querySelectorAll('#nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    navLinks.classList.remove('active');
-    menuToggle.setAttribute('aria-expanded','false');
+// for close menu on click link
+document.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    let menu = document.querySelector(".navbar-collapse");
+    if (menu.classList.contains("show")) {
+      new bootstrap.Collapse(menu).toggle();
+    }
   });
 });
+
+
+document.getElementById('year').innerText = new Date().getFullYear();
